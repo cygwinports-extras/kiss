@@ -1,0 +1,51 @@
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x ltmain.sh -x 'config.*' -x depcomp -x install-sh -x missing -x mkinstalldirs -x autom4te.cache -x '*compile' -x Makefile.in.in -x 'intltool*.in' -x 'xml-i18n-*.in' -x '*.pyc' -x '*.mo' -x '*.gmo' -x ABOUT-NLS -x Makevars.template -x COPYING -x INSTALL -x mdate-sh -x '*.orig' -x '*.rej' -x '*~' -x '*.temp' -x texinfo.tex -x ylwrap -x Makefile.in -x makefile.in -x configure -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x omf.make -x xmldocs.make -x 'libtool.m4.in*' -x configure.bak -x configure.files -x acinclude.m4 -x subdirs -x configure.in origsrc/kiss-0.0.1/admin/cvs.sh src/kiss-0.0.1/admin/cvs.sh
+--- origsrc/kiss-0.0.1/admin/cvs.sh	2004-02-28 03:56:36.000000000 -0600
++++ src/kiss-0.0.1/admin/cvs.sh	2007-02-14 10:18:04.004425800 -0600
+@@ -29,7 +29,7 @@
+ {
+ AUTOCONF_VERSION=`$AUTOCONF --version | head -n 1`
+ case $AUTOCONF_VERSION in
+-  Autoconf*2.5* | autoconf*2.5* ) : ;;
++  Autoconf*2.[56]* | autoconf*2.[56]* ) : ;;
+   "" )
+     echo "*** AUTOCONF NOT FOUND!."
+     echo "*** KDE requires autoconf 2.52, 2.53 or 2.54"
+@@ -44,7 +44,7 @@
+  
+ AUTOHEADER_VERSION=`$AUTOHEADER --version | head -n 1`
+ case $AUTOHEADER_VERSION in
+-  Autoconf*2.5* | autoheader*2.5* ) : ;;
++  Autoconf*2.[56]* | autoheader*2.[56]* ) : ;;
+   "" )
+     echo "*** AUTOHEADER NOT FOUND!."
+     echo "*** KDE requires autoheader 2.52 or 2.53 (part of autoconf)"
+diff -urN -x CYGWIN-PATCHES -x 'aclocal.m4*' -x ltmain.sh -x 'config.*' -x depcomp -x install-sh -x missing -x mkinstalldirs -x autom4te.cache -x '*compile' -x Makefile.in.in -x 'intltool*.in' -x 'xml-i18n-*.in' -x '*.pyc' -x '*.mo' -x '*.gmo' -x ABOUT-NLS -x Makevars.template -x COPYING -x INSTALL -x mdate-sh -x '*.orig' -x '*.rej' -x '*~' -x '*.temp' -x texinfo.tex -x ylwrap -x Makefile.in -x makefile.in -x configure -x gnome-doc-utils.make -x gnome-doc-utils.m4 -x intltool.m4 -x omf.make -x xmldocs.make -x 'libtool.m4.in*' -x configure.bak -x configure.files -x acinclude.m4 -x subdirs -x configure.in origsrc/kiss-0.0.1/src/Makefile.am src/kiss-0.0.1/src/Makefile.am
+--- origsrc/kiss-0.0.1/src/Makefile.am	2004-12-06 16:43:57.000000000 -0600
++++ src/kiss-0.0.1/src/Makefile.am	2007-02-14 10:29:28.386916100 -0600
+@@ -6,20 +6,19 @@
+ %.moc: %.h
+ 	moc -o $@ $<
+ 
+-noinst_PROGRAMS = \
++bin_PROGRAMS = \
+ 	kiss
+ 
+-kiss_CPPFLAGS = \
+-	$(KDE_INCLUDES) \
+-	$(QT_INCLUDES) \
++INCLUDES = \
++	$(all_includes) \
+ 	$(GST_CFLAGS)
+ 
+ kiss_LDFLAGS = \
+-	$(KDE_RPATH) \
+-	$(GST_LIBS)
++	$(KDE_RPATH)
+ 
+ kiss_LDADD = \
+-	$(KDE_LDFLAGS) \
++	$(all_libraries) \
++	$(GST_LIBS) \
+ 	$(LIB_KDEUI) \
+ 	$(LIB_KIO)
+ 

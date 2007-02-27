@@ -1,0 +1,5 @@
+inherit kde3
+
+DESCRIPTION="KDE GStreamer light media player"
+HOMEPAGE="http://ronald.bitfreak.net/kiss.php"
+SRC_URI=http://ronald.bitfreak.net/priv/${P}.tar.gz
